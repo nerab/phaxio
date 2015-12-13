@@ -131,7 +131,7 @@ module Phaxio
     #         Phaxio.
     #
     # options - The Hash options used to refne th selection (default: {}):
-    #           area_code - An integer area code you'd like to filter by 
+    #           area_code - An integer area code you'd like to filter by
     #                       (optional).
     #           number    - A String phone number you'd like to retrieve
     #                       (optional).
