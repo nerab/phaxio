@@ -17,7 +17,7 @@ class TestRecipient < MiniTest::Test
     recipient = Phaxio::Recipient.from_hash(
       'number' => '4141234567',
       'status' => 'success',
-      'completed_at' => 1_293_911_100
+      'completed_at' => 1_293_911_100,
     )
 
     assert(recipient)

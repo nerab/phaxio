@@ -1,0 +1,21 @@
+{
+   "is_test" : true,
+   "completed_at" : 1450014386,
+   "status" : "failure",
+   "id" : 19324909,
+   "direction" : "sent",
+   "recipients" : [
+      {
+         "completed_at" : 1450014386,
+         "status" : "failure",
+         "error_code" : "User simulated Document Conversion Error",
+         "error_type" : "documentConversionError",
+         "number" : "+123456789"
+      }
+   ],
+   "error_code" : "User simulated Document Conversion Error",
+   "num_pages" : 0,
+   "error_type" : "documentConversionError",
+   "requested_at" : 1450014383,
+   "cost" : 0
+}

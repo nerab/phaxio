@@ -67,7 +67,7 @@ module Phaxio
     end
 
     def config!(key)
-      fail IncompleteConfiguration.new(key) if ENV[key].nil? || ENV[key].empty? 
+      fail IncompleteConfiguration.new(key) if ENV[key].nil? || ENV[key].empty?
       ENV.fetch(key)
     end
   end

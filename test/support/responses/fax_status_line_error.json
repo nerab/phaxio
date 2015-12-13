@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "message": "Retrieved fax successfully",
+  "data": {
+    "id": 19325235,
+    "num_pages": 1,
+    "cost": 0,
+    "direction": "sent",
+    "status": "failure",
+    "is_test": true,
+    "requested_at": 1450018819,
+    "completed_at": 1450018824,
+    "recipients": [
+      {
+        "number": "+14141234567",
+        "status": "failure",
+        "error_code": "User requested simulated lineError",
+        "error_type": "lineError",
+        "completed_at": 1450018824
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "Retrieved fax successfully",
+  "data": {
+    "id": 19324909,
+    "num_pages": 0,
+    "cost": 0,
+    "direction": "sent",
+    "status": "failure",
+    "is_test": true,
+    "requested_at": 1450014383,
+    "error_code": "User simulated Document Conversion Error",
+    "error_type": "documentConversionError",
+    "completed_at": 1450014386,
+    "recipients": [
+      {
+        "number": "+14141234567",
+        "status": "failure",
+        "error_code": "User simulated Document Conversion Error",
+        "error_type": "documentConversionError",
+        "completed_at": 1450014386
+      }
+    ]
+  }
+}
