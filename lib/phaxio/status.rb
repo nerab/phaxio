@@ -1,0 +1,82 @@
+module Phaxio
+  class Status
+    FINAL = %w(success failure partialsuccess)
+
+    attr_accessor :provider
+    attr_reader :id
+
+    def initialize(id)
+      fail ArgumentError.new('Missing fax id') if id.nil?
+      @id = id
+    end
+
+    def delivered?
+      'success' == state
+    end
+
+    def state
+      fax['status']
+    end
+
+    def page_count
+      fax['num_pages']
+    end
+
+    def cost
+      fax['cost']
+    end
+
+    def direction
+      fax['direction']
+    end
+
+    def requested_at
+      Time.at(fax['requested_at'])
+    end
+
+    def completed_at
+      Time.at(fax['completed_at'])
+    end
+
+    def test?
+      fax['is_test']
+    end
+
+    def recipients
+      fax['recipients'].map { |recipient| Recipient.from_hash(recipient) }
+    end
+
+    def to_s
+      "#{state} as #{fax['id']}"
+    end
+
+    #
+    # returns true if the status is final, i.e. it is not expected to change
+    # even after subsequent calls to this method.
+    #
+    def final?
+      return false if @response.nil?
+      FINAL.include?(@response.data['status'])
+    end
+
+    private
+
+    def fax
+      response.data
+    end
+
+    def response
+      if @response && final?
+        @response
+      else
+        @response = Response.new(provider.get_fax_status(id: @id))
+        fail @response.message unless @response.success?
+        @response
+      end
+    end
+
+    def provider
+      @provider || Phaxio
+    end
+  end
+end
