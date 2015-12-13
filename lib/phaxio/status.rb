@@ -46,6 +46,10 @@ module Phaxio
       fax['recipients'].map { |recipient| Recipient.from_hash(recipient) }
     end
 
+    def raw
+      provider.get_fax_status(id: @id)
+    end
+
     def to_s
       "#{state} as #{fax['id']}"
     end
@@ -69,9 +73,7 @@ module Phaxio
       if @response && final?
         @response
       else
-        @response = Response.new(provider.get_fax_status(id: @id))
-        fail @response.message unless @response.success?
-        @response
+        @response = Response.new(raw)
       end
     end
 

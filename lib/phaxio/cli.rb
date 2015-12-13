@@ -47,6 +47,8 @@ module Phaxio
     def status(id)
       configure!
       status = Phaxio::Status.new(id)
+
+      STDERR.puts JSON.pretty_generate(status.raw) if options[:verbose]
       puts status
 
       return unless options[:continue]
