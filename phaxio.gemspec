@@ -15,10 +15,16 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Phaxio::VERSION
 
-  gem.add_runtime_dependency "httmultiparty"
+  gem.add_runtime_dependency 'httmultiparty', '~> 0.3'
+  gem.add_runtime_dependency 'thor'
 
-  gem.add_development_dependency 'bundler'
+  gem.add_development_dependency 'bundler', '~> 1.10'
   gem.add_development_dependency 'fakeweb', '~> 1.3'
-  gem.add_development_dependency 'rake', '~> 10'
-  gem.add_development_dependency 'minitest', '~> 5'
+  gem.add_development_dependency 'rake', '~> 10.4'
+  gem.add_development_dependency 'minitest', '~> 5.8'
+  gem.add_development_dependency 'pry-byebug', '~> 3.3'
+  gem.add_development_dependency 'guard-bundler', '~> 2.1'
+  gem.add_development_dependency 'guard-minitest', '~> 2.4'
+  gem.add_development_dependency 'rubocop', '~> 0.35'
+  gem.add_development_dependency 'guard-rubocop', '~> 1.2'
 end

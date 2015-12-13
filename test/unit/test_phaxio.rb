@@ -1,4 +1,4 @@
-require_relative "test_helper"
+require_relative "../test_helper"
 
 class TestPhaxio < MiniTest::Test
   def test_config
