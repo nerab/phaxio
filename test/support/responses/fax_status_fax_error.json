@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "message": "Retrieved fax successfully",
+  "data": {
+    "id": 19326572,
+    "num_pages": 1,
+    "cost": 0,
+    "direction": "sent",
+    "status": "failure",
+    "is_test": true,
+    "requested_at": 1450025900,
+    "completed_at": 1450025903,
+    "recipients": [
+      {
+        "number": "+123456789",
+        "status": "failure",
+        "error_code": "User requested simulated faxError",
+        "error_type": "faxError",
+        "completed_at": 1450025903
+      }
+    ]
+  }
+}

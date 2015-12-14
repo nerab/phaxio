@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "Retrieved fax successfully",
+  "data": {
+    "id": 19326719,
+    "num_pages": 1,
+    "cost": 0,
+    "direction": "sent",
+    "status": "failure",
+    "is_test": true,
+    "requested_at": 1450026379,
+    "error_code": "User requested generalError",
+    "error_type": "generalError",
+    "completed_at": 1450026382,
+    "recipients": [
+      {
+        "number": "+123456789",
+        "status": "failure",
+        "error_code": "User requested generalError",
+        "error_type": "generalError",
+        "completed_at": 1450026382
+      }
+    ]
+  }
+}

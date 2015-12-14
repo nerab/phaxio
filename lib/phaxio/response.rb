@@ -1,5 +1,7 @@
 module Phaxio
   class Response
+    include ErrorMapper
+
     def initialize(hash)
       @hash = hash
     end
@@ -20,15 +22,14 @@ module Phaxio
       @hash['message']
     end
 
-    def error
-      return nil unless @hash['error_type']
-      resolve_class(@hash['error_type']).new(@hash['error_code'])
-    end
-
     private
 
-    def resolve_class(name)
-      Phaxio::Errors.const_get(name.sub(/./, &:upcase))
+    def error_code
+      @hash['error_code']
+    end
+
+    def error_type
+      @hash['error_type']
     end
   end
 end

@@ -43,7 +43,8 @@ module Phaxio
     end
 
     def recipients
-      fax['recipients'].map { |recipient| Recipient.from_hash(recipient) }
+      recipient_mapper = RecipientMapper.new
+      fax['recipients'].map { |recipient| recipient_mapper.map(recipient) }
     end
 
     def raw

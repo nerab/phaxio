@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "message": "Retrieved fax successfully",
+  "data": {
+    "id": 19326706,
+    "num_pages": 1,
+    "cost": 0,
+    "direction": "sent",
+    "status": "failure",
+    "is_test": true,
+    "requested_at": 1450026347,
+    "completed_at": 1450026350,
+    "recipients": [
+      {
+        "number": "+123456789",
+        "status": "failure",
+        "error_code": "General error.  Contact Phaxio support.",
+        "error_type": "generalError",
+        "completed_at": 1450026350
+      }
+    ]
+  }
+}

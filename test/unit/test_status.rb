@@ -30,6 +30,7 @@ class TestStatus < MiniTest::Test
     assert_equal('4141234567', recipient.number)
     assert_equal('success', recipient.status)
     assert_equal(Time.at(1_293_911_100), recipient.completed_at)
+    refute(recipient.error)
   end
 
   def test_nil_id
@@ -94,5 +95,92 @@ class TestStatus < MiniTest::Test
     assert_equal('+14141234567', recipient.number)
     assert_equal('failure', recipient.status)
     assert_equal(Time.at(1_450_018_824), recipient.completed_at)
+  end
+
+  def test_send_fax_error
+    register(
+      'https://api.phaxio.com/v1/faxStatus',
+      'test/support/responses/fax_status_fax_error.json'
+    )
+
+    status = Phaxio::Status.new(19_326_572)
+
+    refute status.delivered?
+    assert_equal(19_326_572, status.id)
+    assert_equal(1, status.page_count)
+    assert_equal(0, status.cost)
+    assert_equal('sent', status.direction)
+    assert_equal('failure', status.state)
+    assert_equal(true, status.test?)
+    assert_equal(Time.at(1_450_025_900), status.requested_at)
+    assert_equal(Time.at(1_450_025_903), status.completed_at)
+
+    recipients = status.recipients
+    assert(recipients)
+    assert_equal(1, recipients.size)
+
+    recipient = recipients.first
+    assert(recipient)
+    assert_equal('+123456789', recipient.number)
+    assert_equal('failure', recipient.status)
+    assert_equal(Time.at(1_450_025_903), recipient.completed_at)
+  end
+
+  def test_send_fatal_error
+    register(
+      'https://api.phaxio.com/v1/faxStatus',
+      'test/support/responses/fax_status_fatal_error.json'
+    )
+
+    status = Phaxio::Status.new(19_326_706)
+
+    refute status.delivered?
+    assert_equal(19_326_706, status.id)
+    assert_equal(1, status.page_count)
+    assert_equal(0, status.cost)
+    assert_equal('sent', status.direction)
+    assert_equal('failure', status.state)
+    assert_equal(true, status.test?)
+    assert_equal(Time.at(1_450_026_347), status.requested_at)
+    assert_equal(Time.at(1_450_026_350), status.completed_at)
+
+    recipients = status.recipients
+    assert(recipients)
+    assert_equal(1, recipients.size)
+
+    recipient = recipients.first
+    assert(recipient)
+    assert_equal('+123456789', recipient.number)
+    assert_equal('failure', recipient.status)
+    assert_equal(Time.at(1_450_026_350), recipient.completed_at)
+  end
+
+  def test_send_general_error
+    register(
+      'https://api.phaxio.com/v1/faxStatus',
+      'test/support/responses/fax_status_general_error.json'
+    )
+
+    status = Phaxio::Status.new(19_326_719)
+
+    refute status.delivered?
+    assert_equal(19_326_719, status.id)
+    assert_equal(1, status.page_count)
+    assert_equal(0, status.cost)
+    assert_equal('sent', status.direction)
+    assert_equal('failure', status.state)
+    assert_equal(true, status.test?)
+    assert_equal(Time.at(1_450_026_379), status.requested_at)
+    assert_equal(Time.at(1_450_026_382), status.completed_at)
+
+    recipients = status.recipients
+    assert(recipients)
+    assert_equal(1, recipients.size)
+
+    recipient = recipients.first
+    assert(recipient)
+    assert_equal('+123456789', recipient.number)
+    assert_equal('failure', recipient.status)
+    assert_equal(Time.at(1_450_026_382), recipient.completed_at)
   end
 end
