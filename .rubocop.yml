@@ -1,0 +1,21 @@
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'test/support/**/*'
+
+  DisplayCopNames: true
+
+Documentation:
+    Enabled: false
+
+Style/Encoding:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Max: 100

@@ -19,8 +19,3 @@ group 'integration' do
     watch(%r{^test/integration/test_(.*)\.rb}) { |m| "test/integration/test_#{m[1]}.rb" }
   end
 end
-
-guard :rubocop do
-  watch(/.+\.rb$/)
-  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
-end
