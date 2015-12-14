@@ -33,7 +33,7 @@ module Phaxio
         fax["filename[#{i}]"] = File.new(file)
       end
 
-      response = Response.new(Phaxio.send_fax(fax))
+      response = ResponseMapper.new.map(Phaxio.send_fax(fax))
 
       if response.success?
         puts Phaxio::Status.new(response.data['faxId'])

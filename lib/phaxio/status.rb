@@ -74,7 +74,7 @@ module Phaxio
       if @response && final?
         @response
       else
-        @response = Response.new(raw)
+        @response = ResponseMapper.new.map(raw)
       end
     end
 

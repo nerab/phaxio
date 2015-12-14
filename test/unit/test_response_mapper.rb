@@ -1,7 +1,11 @@
 require_relative '../test_helper'
 
-class TestResponse < MiniTest::Test
+class TestResponseMapper < MiniTest::Test
   include FakeWebHelpers
+
+  def setup
+    @response_mapper = Phaxio::ResponseMapper.new
+  end
 
   def teardown
     clean_registry
@@ -10,7 +14,7 @@ class TestResponse < MiniTest::Test
   def test_send_success
     register('https://api.phaxio.com/v1/send', 'test/support/responses/send_success.json')
 
-    response = Phaxio::Response.new(Phaxio.send_fax({}))
+    response = @response_mapper.map(Phaxio.send_fax({}))
 
     assert(response)
     assert(response.success?)
@@ -23,7 +27,7 @@ class TestResponse < MiniTest::Test
       'test/support/responses/send_document_conversion_error.json'
     )
 
-    response = Phaxio::Response.new(Phaxio.send_fax({}))
+    response = @response_mapper.map(Phaxio.send_fax({}))
 
     assert(response)
     refute(response.success?)
