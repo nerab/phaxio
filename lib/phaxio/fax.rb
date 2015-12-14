@@ -23,8 +23,8 @@ module Phaxio
       @recipients << recipient
     end
 
-    def add_file(file_name)
-      @files << File.new(file_name)
+    def add_file(*file_names)
+      @files.concat(file_names.flatten.map { |file_name| File.new(file_name) })
     end
 
     def to_h

@@ -27,13 +27,11 @@ module Phaxio
     def send(*files)
       configure!
 
-      fax = { to: options[:to] }
+      fax = Phaxio::Fax.new
+      fax.add_recipient(options['to'])
+      fax.add_file(files)
 
-      files.each.with_index do |file, i|
-        fax["filename[#{i}]"] = File.new(file)
-      end
-
-      response = ResponseMapper.new.map(Phaxio.send_fax(fax))
+      response = repository.send(fax)
 
       if response.success?
         puts Phaxio::Status.new(response.data['faxId'])
@@ -46,7 +44,7 @@ module Phaxio
     option :continue, desc: 'Keep polling until status is final'
     def status(id)
       configure!
-      status = Phaxio::Status.new(id)
+      status = repository.status(id)
 
       STDERR.puts JSON.pretty_generate(status.raw) if options[:verbose]
       puts status
@@ -71,6 +69,10 @@ module Phaxio
     def config!(key)
       fail IncompleteConfiguration.new(key) if ENV[key].nil? || ENV[key].empty?
       ENV.fetch(key)
+    end
+
+    def repository
+      Phaxio::Repository.new
     end
   end
 end

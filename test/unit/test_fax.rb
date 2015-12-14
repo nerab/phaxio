@@ -45,10 +45,22 @@ class TestFax < MiniTest::Test
     assert(hash['filename[0]'])
   end
 
-  def test_multiple_filess
+  def test_multiple_files
     @fax.add_recipient('+1234567890')
     @fax.add_file(fixture('responses/test.pdf'))
     @fax.add_file(fixture('responses/test.pdf'))
+
+    hash = @fax.to_h
+    assert(hash)
+    refute_empty(hash)
+    assert_equal('+1234567890', hash['to[0]'])
+    assert(hash['filename[0]'])
+    assert(hash['filename[1]'])
+  end
+
+  def test_multiple_file_array
+    @fax.add_recipient('+1234567890')
+    @fax.add_file([fixture('responses/test.pdf'), fixture('responses/test.pdf')])
 
     hash = @fax.to_h
     assert(hash)
