@@ -1,4 +1,3 @@
-# $LOAD_PATH << '.'
 require 'minitest/autorun'
 require_relative '../lib/phaxio'
 require 'fakeweb'
@@ -6,6 +5,12 @@ require 'fakeweb'
 Phaxio.config do |config|
   config.api_key = '12345678910'
   config.api_secret = '10987654321'
+end
+
+module FixtureHelpers
+  def fixture(file_name)
+    Pathname(__dir__) + 'support' + file_name
+  end
 end
 
 module FakeWebHelpers
